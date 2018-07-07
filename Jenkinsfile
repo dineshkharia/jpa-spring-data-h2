@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'cleaning...'
                 withMaven(maven : 'MavenGlobalToolConfig') {
-                    sh mvn clean
+                    sh "mvn clean"
                 }
 
             }
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo 'packaging.....'
                 withMaven(maven : 'MavenGlobalToolConfig') {
-                    sh mvn package
+                    sh "mvn package"
                 }
             }
         }
