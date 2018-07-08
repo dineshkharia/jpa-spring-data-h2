@@ -6,16 +6,16 @@ pipeline {
            maven 'MavenGlobalToolConfig'
         }
     stages {
-        stage('Stage clean') {
+        stage('Stage - Build') {
             steps {
-                echo 'cleaning...'
-                sh 'mvn clean'
+                echo 'cleaning and packaging.....'
+                sh 'mvn clean package'
             }
         }
-        stage('Stage package') {
+        stage('Stage - Deploy') {
             steps {
-               echo 'packaging.....'
-               sh 'mvn package'
+                sh 'scp -v -o StrictHostKeyChecking=no  -i /var/lib/jenkins/secrets/ubuntu-jenkins.pem target/*.jar ubuntu@13.232.153.38:/home/ubuntu'
+                sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/secrets/ubuntu-jenkins.pem ubuntu@13.232.153.38 '/home/ubuntu/start.sh'"
             }
         }
     }
