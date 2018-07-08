@@ -9,7 +9,7 @@ pipeline {
         stage('Stage - Build') {
             steps {
                 echo 'cleaning and packaging......'
-                sh 'mvn clean package'
+                sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
         stage('Stage - Deploy') {
